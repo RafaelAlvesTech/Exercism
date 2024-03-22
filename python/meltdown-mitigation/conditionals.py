@@ -1,7 +1,7 @@
 """Functions to prevent a nuclear meltdown."""
 
 
-def is_criticality_balanced(temperature, neutrons_emitted):
+def is_criticality_balanced(temperature: int, neutrons_emitted: int) -> bool:
     """Verify criticality is balanced.
 
     :param temperature: int or float - temperature value in kelvin.
@@ -14,10 +14,10 @@ def is_criticality_balanced(temperature, neutrons_emitted):
     - The product of temperature and neutrons emitted per second is less than 500000.
     """
 
-    return temperature < 800 and neutrons_emitted > 500 and 500000 < temperature * neutrons_emitted
+    return temperature < 800 and neutrons_emitted > 500 and temperature * neutrons_emitted < 500000
 
 
-def reactor_efficiency(voltage, current, theoretical_max_power):
+def reactor_efficiency(voltage: float, current: float, theoretical_max_power: float) -> str:
     """Assess reactor efficiency zone.
 
     :param voltage: int or float - voltage value.
@@ -32,13 +32,37 @@ def reactor_efficiency(voltage, current, theoretical_max_power):
     3. red -> efficiency below 60%, but still 30% or more,
     4. black ->  less than 30% efficient.
 
+
+
     The percentage value is calculated as
     (generated power/ theoretical max power)*100
     where generated power = voltage * current
     """
+    genereated_power = voltage * current
+    efficiency = (genereated_power / theoretical_max_power) * 100
+    if efficiency is not None:
 
-    pass
+        if efficiency >= 80:
+            return 'green'
+        elif 60 > efficiency < 80:
+            return 'orange'
+        elif 30 >= efficiency < 60:
+            return 'red'
+        elif efficiency < 30:
+            return 'black'
+        else:
+            print("Error")
 
+            if efficiency >= 80:
+                return 'green'
+            elif 60 <= efficiency < 80:
+                return 'orange'
+            elif 30 <= efficiency < 60:
+                return 'red'
+            elif efficiency < 30:
+                return 'black'
+            else:
+                return "Error" 
 
 def fail_safe(temperature, neutrons_produced_per_second, threshold):
     """Assess and return status code for the reactor.

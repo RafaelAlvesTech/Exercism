@@ -59,6 +59,6 @@ def get_leftover_of_bills(amount, denomination):
 
 
 def exchangeable_value(budget, exchange_rate, spread, denomination):
-    new_exchange_rate = exchange_rate * ((spread/100)+1)
-    x = budget/new_exchange_rate
-    return (x//denomination) * denomination
+    new_exchange_rate = exchange_rate * ((spread / 100) + 1)
+    x = budget / new_exchange_rate
+    return (x // denomination) * denomination
