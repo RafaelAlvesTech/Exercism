@@ -1,5 +1,5 @@
 import unittest
-import pytest 
+import pytest
 
 from exchange import (
     exchange_money,
